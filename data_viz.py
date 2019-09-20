@@ -15,6 +15,7 @@ def boxplot(L, out_file_name):
     plt.savefig(out_file_name)
     pass
 
+
 def histogram(L, out_file_name):
     """plot boxplot for an input array and save the result as a png file
     """
@@ -25,6 +26,7 @@ def histogram(L, out_file_name):
               'stdev: ' + str(math_lib.list_stdev(L)))
     plt.savefig(out_file_name)
     pass
+
 
 def combo(L, out_file_name):
     """plot boxplot for an input array and save the result as a png file
