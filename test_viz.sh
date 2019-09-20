@@ -3,8 +3,19 @@
 test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
 . ssshtest
 
+run test_style pycodestyle data_viz.py
+assert_no_stdout
+run test_style pycodestyle get_data.py
+assert_no_stdout
+run test_style pycodestyle math_lib.py
+assert_no_stdout
+run test_style pycodestyle test_viz.py
+assert_no_stdout
+run test_style pycodestyle viz.py
+assert_no_stdout
+
 echo "...plot histogram..."
-bash gen_data.sh | python viz.py --col_num 2 --out_file hist1.png --plot_type histogram
+run plot_hist bash gen_data.sh | python viz.py --col_num 2 --out_file hist1.png --plot_type histogram
 assert_exit_code 0
 assert_std_out
 if [ -f "hist1.png" ]; then
@@ -13,7 +24,7 @@ if [ -f "hist1.png" ]; then
 fi
 
 echo "...plot boxplot..."
-bash gen_data.sh | python viz.py --col_num 1 --out_file hist2.png --plot_type boxplot
+run plot_box bash gen_data.sh | python viz.py --col_num 1 --out_file hist2.png --plot_type boxplot
 assert_exit_code 0
 assert_std_out
 if [ -f "hist2.png" ]; then
@@ -22,7 +33,7 @@ if [ -f "hist2.png" ]; then
 fi
 
 echo "...plot combo..."
-bash gen_data.sh | python viz.py --col_num 2 --out_file hist3.png --plot_type combo
+run plot_combo bash gen_data.sh | python viz.py --col_num 2 --out_file hist3.png --plot_type combo
 assert_exit_code 0
 assert_std_out
 if [ -f "hist3.png" ]; then
@@ -31,26 +42,26 @@ if [ -f "hist3.png" ]; then
 fi
 
 echo "...missing arguments..."
-bash gen_data.sh | python viz.py --col_num 1 --out_file hist.png --plot_type
+run missing_args bash gen_data.sh | python viz.py --col_num 1 --out_file hist.png --plot_type
 assert_exit_code 1
 assert_std_out
 
 echo "...missing arguments..."
-bash gen_data.sh | python viz.py --col_num 2 --out_file --plot_type histogram
+run missing_args bash gen_data.sh | python viz.py --col_num 2 --out_file --plot_type histogram
 assert_exit_code 1
 assert_std_out
 
 echo "invalid column number"
-bash gen_data.sh | python viz.py --col_num 3 --out_file hist3.png --plot_type histogram
+run invalid_column_number bash gen_data.sh | python viz.py --col_num 3 --out_file hist3.png --plot_type histogram
 assert_exit_code 1
 assert_std_out
 
 echo "invalid column number"
-bash gen_data.sh | python viz.py --col_num 0 --out_file hist3.png --plot_type histogram
+run invalid_column_number bash gen_data.sh | python viz.py --col_num 0 --out_file hist3.png --plot_type histogram
 assert_exit_code 1
 assert_std_out
 
 echo "...show help of viz.py..."
-bash gen_data.sh | python viz.py
+run missing_args bash gen_data.sh | python viz.py
 assert_exit_code 1
 assert_std_out
