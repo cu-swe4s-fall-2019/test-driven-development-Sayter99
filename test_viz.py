@@ -3,6 +3,8 @@ import math_lib
 import random
 import math
 import statistics
+import data_viz
+import os
 
 
 class TestMathLib(unittest.TestCase):
@@ -73,6 +75,39 @@ class TestMathLib(unittest.TestCase):
         V = ['abc', 123, 0.1111, 'ww', 'hey', True]
         self.assertIsNone(math_lib.list_mean(V))
         self.assertIsNone(math_lib.list_stdev(V))
+
+    def test_boxplot(self):
+        V = []
+        # test array with 1000 random elements
+        for _ in range(1000):
+            r = random.randint(-1000, 1000)
+            V.append(r)
+        # plot boxplot and verify the png is generated
+        data_viz.boxplot(V, 'test.png')
+        self.assertTrue(os.path.exists('test.png'))
+        os.remove('test.png')
+
+    def test_histogram(self):
+        V = []
+        # test array with 1000 random elements
+        for _ in range(1000):
+            r = random.randint(-1000, 1000)
+            V.append(r)
+        # plot histogram and verify the png is generated
+        data_viz.histogram(V, 'test.png')
+        self.assertTrue(os.path.exists('test.png'))
+        os.remove('test.png')
+
+    def test_combo(self):
+        V = []
+        # test array with 1000 random elements
+        for _ in range(1000):
+            r = random.randint(-1000, 1000)
+            V.append(r)
+        # plot combo and verify the png is generated
+        data_viz.combo(V, 'test.png')
+        self.assertTrue(os.path.exists('test.png'))
+        os.remove('test.png')
 
 
 if __name__ == '__main__':
