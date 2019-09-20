@@ -12,7 +12,7 @@ def read_stdin_col(col_num):
         element = cols[col_num - 1]
         # test the content
         try:
-            float(element)
+            element = float(element)
         except ValueError:
             continue
         L.append(element)

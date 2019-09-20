@@ -26,8 +26,8 @@ def list_stdev(V):
                 print('Please input a list containing numbers')
                 return None
     # if it is an empty list, return None
-    if (len(V) == 0):
-        print('Empty list')
+    if (len(V) < 2):
+        print('List too short')
         return None
     # if mean is None, return None
     mean = list_mean(V)

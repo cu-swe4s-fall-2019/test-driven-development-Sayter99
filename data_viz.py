@@ -5,6 +5,8 @@ matplotlib.use('Agg')
 
 
 def boxplot(L, out_file_name):
+    """plot boxplot for an input array and save the result as a png file
+    """
     plt.boxplot(L)
     plt.ylabel('Frequency')
     plt.xlabel('Value')
@@ -14,7 +16,9 @@ def boxplot(L, out_file_name):
     pass
 
 def histogram(L, out_file_name):
-    plt.hist(L, bins=len(L)/10)
+    """plot boxplot for an input array and save the result as a png file
+    """
+    plt.hist(L, bins=30)
     plt.ylabel('Frequency')
     plt.xlabel('Value')
     plt.title('mean: ' + str(math_lib.list_mean(L)) +
@@ -23,8 +27,10 @@ def histogram(L, out_file_name):
     pass
 
 def combo(L, out_file_name):
+    """plot boxplot for an input array and save the result as a png file
+    """
     fig, axs = plt.subplots(1, 2, sharey=True, tight_layout=True)
-    axs[0].hist(L, bins=len(L)/10)
+    axs[0].hist(L, bins=30)
     axs[1].boxplot(L)
     fig.savefig(out_file_name)
     pass
