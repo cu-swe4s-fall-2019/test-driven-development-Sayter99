@@ -52,9 +52,9 @@ def main():
     if (args.plot_type == 'histogram'):
         data_viz.histogram(L, args.out_file)
     elif (args.plot_type == 'boxplot'):
-        data_viz.histogram(L, args.out_file)
+        data_viz.boxplot(L, args.out_file)
     elif (args.plot_type == 'combo'):
-        data_viz.histogram(L, args.out_file)
+        data_viz.combo(L, args.out_file)
     else:
         print('Invalid plot type')
         sys.exit(1)
